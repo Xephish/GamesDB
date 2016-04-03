@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<developers>
+{% for developer in developers %}
+<developer>
+	<idDeveloper>{{developer.idDeveloper}}</idDeveloper>
+	<developer_name>{{developer.developer_name}}</developer_name>
+	<list_of_games>{{developer.list_of_games}}</list_of_games>
+	<list_of_platforms>{{developer.list_of_platforms}}</list_of_platforms>
+	<average_videogame_rating>{{developer.average_videogame_rating}}</average_videogame_rating>
+</developer>
+{% endfor %}
+</developers>
