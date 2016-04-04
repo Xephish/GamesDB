@@ -11,8 +11,11 @@ class Developer(models.Model):
     list_of_platforms = models.TextField(blank=True, null=True)
     average_videogames_rating = models.TextField(blank=True, null=True)
 
-    def	__unicode__(self):
-        return	u"%s"	%	self.id_developer
+    def __unicode__(self):
+        return u"%s" % self.id_developer
+
+    def get_absolute_url(self):
+        return reverse('mygamesdb:developers_detail', kwargs={'pk': self.pk})
 
 
 class Platform(models.Model):
@@ -32,8 +35,11 @@ class Platform(models.Model):
     rating = models.TextField(blank=True, null=True)
     images = models.TextField(blank=True, null=True)
 
-    def	__unicode__(self):
-        return	u"%s"	%	self.id
+    def __unicode__(self):
+        return u"%s" % self.id
+
+    def get_absolute_url(self):
+        return reverse('mygamesdb:platform_detail', kwargs={'pk': self.pk})
 
 
 class Game(models.Model):
@@ -51,7 +57,8 @@ class Game(models.Model):
     fanart_list = models.TextField(blank=True, null=True)
     updates = models.TextField(blank=True, null=True)
 
-    def	__unicode__(self):
-        return	u"%s"	%	self.id
-    #def	get_absolute_url(self):
-    #    return	reverse('myrestaurants:restaurant_detail',	kwargs={'pk':	self.pk})
+    def __unicode__(self):
+        return u"%s" % self.id
+
+    def get_absolute_url(self):
+        return reverse('mygamesdb:games_detail', kwargs={'pk': self.pk})
