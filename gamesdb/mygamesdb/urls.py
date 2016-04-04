@@ -10,9 +10,9 @@ urlpatterns	= patterns('',
     # List developers list:/gamesdb
     url(r'^$',
         ListView.as_view(
-            queryset = Developer.objects,
-            context_object_name = 'developers_list',
-            template_name = 'mygamesdb/developers_list.xml'),
+            queryset = Developer.objects.all(),
+            context_object_name = 'developers',
+            template_name = 'mygamesdb/developers_list.html'),
         name = 'developers_list'),
 
     # Developer details, ex: /gamesdb/developers/1

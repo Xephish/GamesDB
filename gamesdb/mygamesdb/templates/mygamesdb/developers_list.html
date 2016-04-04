@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title> GamesDB </title>
+      <h1> GamesDB </h1>
+  </head>
+  <body>
+    <h2 style="text-indent: 1em">Video game developers</h2>
+    {% if developers %}
+    <ul>
+    {% for developer in developers %}
+    <li>
+    <a href="/developers/{{ developer.id }}/"> {{developer.id_developer}} </a>
+    </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p style="text-indent: 2em">No hi ha cap developer.</p>
+    {% endif %}
+  </body>
+</html>

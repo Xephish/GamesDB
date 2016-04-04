@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <developers>
-{% for developer in developers %}
+{% for developer in object_list %}
 <developer>
 	<idDeveloper>{{developer.idDeveloper}}</idDeveloper>
 	<developer_name>{{developer.developer_name}}</developer_name>
