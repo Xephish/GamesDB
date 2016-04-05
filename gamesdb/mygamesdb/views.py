@@ -17,9 +17,9 @@ class DeveloperDetail(DetailView):
 
 class PlatformDetail(DetailView):
     model = Platform
-    template_name = 'mygamesdb/platforms_detail.xml'
+    template_name = 'mygamesdb/platforms_detail.html'
 
 
 class GameDetail(DetailView):
     model = Game
-    template_name = 'mygamesdb/games_detail.xml'
+    template_name = 'mygamesdb/games_detail.html'
