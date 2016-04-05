@@ -20,10 +20,10 @@ urlpatterns	= patterns('',
         name='developers_detail'),
 
     # Developers game details, ex/gamesdb/developers/1/games/1
-    url(r'^developers/(?P<pkr>\d+)/games/(?P<pk>\d+))/$',
+    url(r'^developers/(?P<pkr>\d+)/games/(?P<pk>\d+)/$',
         DetailView.as_view(
         model=Game,
-        template_name='gamesdb/games_detail.xml'),
+        template_name='mygamesdb/games_detail.xml'),
     name='games_detail'),
 
      # List platforms list :/gamesdb
@@ -40,7 +40,7 @@ urlpatterns	= patterns('',
         name='platforms_detail'),
 
     # Platforms game details, ex/gamesdb/plaforms/1/games/1
-    url(r'^platforms/(?P<pkr>\d+)/games/(?P<pk>\d+))/$',
+    url(r'^platforms/(?P<pkr>\d+)/games/(?P<pk>\d+)/$',
         DetailView.as_view(
         model=Game,
         template_name='gamesdb/games_detail.xml'),
