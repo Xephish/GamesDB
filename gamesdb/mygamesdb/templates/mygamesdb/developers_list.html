@@ -9,7 +9,7 @@
     <ul>
     {% for developer in developers %}
     <li>
-    <a href="/developers/{{ developer.id }}/"> {{developer.id_developer}} </a>
+    <a href="{% url "gamesdb:developers_detail" developer.id%}"> {{developer.id_developer}} </a>
     </li>
     {% endfor %}
     </ul>
