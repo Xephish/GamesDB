@@ -23,7 +23,7 @@ urlpatterns	= patterns('',
     url(r'^developers/(?P<pkr>\d+)/games/(?P<pk>\d+)/$',
         DetailView.as_view(
         model=Game,
-        template_name='mygamesdb/games_detail.xml'),
+        template_name='mygamesdb/games_detail.html'),
     name='games_detail'),
 
      # List platforms list :/gamesdb
@@ -31,7 +31,7 @@ urlpatterns	= patterns('',
         ListView.as_view(
             queryset = Platform.objects,
             context_object_name = 'platforms_list',
-            template_name = 'mygamesdb/platforms_list.xml'),
+            template_name = 'mygamesdb/platforms_list.html'),
         name='platforms_list'),
 
      # Platforms details, ex: /gamesdb/platforms/1
@@ -43,6 +43,6 @@ urlpatterns	= patterns('',
     url(r'^platforms/(?P<pkr>\d+)/games/(?P<pk>\d+)/$',
         DetailView.as_view(
         model=Game,
-        template_name='gamesdb/games_detail.xml'),
+        template_name='mygamesdb/games_detail.html'),
     name='games_detail'),
 )
