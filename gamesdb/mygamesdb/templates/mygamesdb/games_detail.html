@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>Video Games Detail</title>
+  </head>
+  <body>
+    <h1>Video Game</h1>
+    <ul>
+      <li>
+        <b>Id:</b> {{ object.id }}
+      </li>
+      <li>
+       <b> Titol:</b> {{ object.game_title }}
+      </li>
+      <li> <b>Developer:</b>
+        <a href="{% url "gamesdb:developers_detail" object.developer.id%}">  {{object.developer.id_developer}} </a>
+      </li>
+      <li>
+        <b>Plataforma:</b>
+        <a href="{% url "gamesdb:platforms_detail" object.platform.id%}">  {{object.platform.id}} </a>
+      </li>
+      <li>
+        <b>Data de sortida:</b> {{ object.release_date }}
+      </li>
+      <li>
+        <b>ESRB:</b> {{ object.ESRB }}
+      </li>
+      <li>
+        <b>Genere:</b> {{ object.generes }}
+      </li>
+      <li>
+        <b>Trailer:</b> {{ object.trailer }}
+      </li>
+      <li>
+        <b>Publisher:</b> {{ object.publisher }}
+      </li>
+      <li>
+        <b>Puntuacio:</b> {{ object.rating }}
+      </li>
+      <li>
+        <b>Similar_count:</b> {{ object.similar_count }}
+      </li>
+      <li>
+        <b>Fanart_list:</b> {{ object.fanart_list }}
+      </li>
+      <li>
+        <b>Updates:</b> {{ object.updates }}
+      </li>
+    </ul>
+  </body>
+</html>
