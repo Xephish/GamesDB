@@ -14,21 +14,32 @@ urlpatterns	= patterns('',
             template_name='mygamesdb/games_list.html'),
         name='games_list'),
 
-    # Developer details, ex: /gamesdb/developers/1
-    url(r'^games/(?P<pk>[a-zA-Z0-9 ]+)/$',
-        GameDetail.as_view(),
-        name='games_detail'),
-
-    url(r'^$developers/$',
+    url(r'^developers/$',
         ListView.as_view(
             queryset=Developer.objects.all(),
             context_object_name='developers',
             template_name='mygamesdb/developers_list.html'),
         name='developers_list'),
 
+    url(r'^platforms/$',
+       ListView.as_view(
+           queryset = Platform.objects.all(),
+           context_object_name = 'platforms',
+           template_name = 'mygamesdb/platforms_list.html'),
+       name='platforms_list'),
+
+    # Developer details, ex: /gamesdb/developers/1
+    url(r'^games/(?P<pk>[a-zA-Z0-9 ]+)/$',
+        GameDetail.as_view(),
+        name='games_detail'),
+
     url(r'^developers/(?P<pk>\d+)/$',
         DeveloperDetail.as_view(),
         name='developers_detail'),
+
+    url(r'^platforms/(?P<pk>[a-zA-Z0-9 ]+)/$',
+        PlatformDetail.as_view(),
+        name='platforms_detail'),
 
     # Developers game details, ex/gamesdb/developers/1/games/1
     # url(r'^games/(?P<game>[a-zA-Z0-9 ]+)/developers/(?P<pk>\d+)/$',
@@ -46,14 +57,7 @@ urlpatterns	= patterns('',
     #   name='platforms_list'),
 
      # Platforms details, ex: /gamesdb/platforms/1
-    url(r'^platforms/(?P<pk>[a-zA-Z0-9 ]+)/$',
-        PlatformDetail.as_view(),
-        name='platforms_detail'),
+
 
     # Platforms game details, ex/gamesdb/plaforms/1/games/1
-    url(r'^platforms/(?P<pkr>\d+)/games/(?P<pk>\d+)/$',
-        DetailView.as_view(
-        model=Game,
-        template_name='gamesdb/games_detail.xml'),
-    name='games_detail'),
 )

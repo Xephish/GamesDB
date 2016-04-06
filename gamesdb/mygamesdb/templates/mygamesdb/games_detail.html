@@ -12,11 +12,11 @@
        <b> Titol:</b> {{ object.game_title }}
       </li>
       <li> <b>Developer:</b>
-        <a href="{% url "gamesdb:developers_detail" object.developer.id%}">  {{object.developer.id_developer}} </a>
+        <a href="{% url "gamesdb:developers_detail" object.developer.id%}">  {{object.developer.developer_name}} </a>
       </li>
       <li>
         <b>Plataforma:</b>
-        <a href="{% url "gamesdb:platforms_detail" object.platform.id%}">  {{object.platform.id}} </a>
+        <a href="{% url "gamesdb:platforms_detail" object.platform.id%}">  {{object.platform.console_name}} </a>
       </li>
       <li>
         <b>Data de sortida:</b> {{ object.release_date }}
