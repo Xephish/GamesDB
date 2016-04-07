@@ -50,6 +50,15 @@
     </ul>
     
     <br>
+      <h3>List of games</h3>
+              {% for game in object.game_set.all %}
+                <li><a href="{% url 'gamesdb:games_detail' game.id %}">{{ game.game_title }}</a></li>
+              {% empty %}
+                <li>Sorry, no games for this platform yet.</li>
+            {% endfor %}
+      <br>
+    
+    <br>
       <a href='/gamesdb/platforms'> Back </a>
 
       <br>
