@@ -4,7 +4,6 @@
   </head>
   <body>
     <h1>Developer</h1>
-    <ul>
       <li>
         <b>Id:</b> {{ object.id_developer }}
       </li>
@@ -12,14 +11,22 @@
         <b>Nom:</b> {{ object.developer_name }}
       </li>
       <li>
-        <b>Llista de jocs:</b> {{ object.list_of_games }}
-      </li>
-      <li>
         <b>Llista de plataformes:</b> {{ object.list_of_platforms }}
       </li>
       <li>
         <b>Puntuacio mitjana:</b> {{ object.average_videogames_rating }}
       </li>
-    </ul>
+      <br>
+      <h3>List of games</h3>
+              {% for game in object.game_set.all %}
+                <li><a href="{% url 'gamesdb:games_detail' game.id %}">{{ game.game_title }}</a></li>
+              {% empty %}
+                <li>Sorry, no games for this developer yet.</li>
+            {% endfor %}
+      <br>
+      <a href='/gamesdb/developers'> Back </a>
+
+      <br>
+      <a href='/gamesdb'> Home </a>
   </body>
 </html>
