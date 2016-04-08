@@ -26,9 +26,18 @@
       </li>
        <li>
         <b>Website:</b>
-         <a href="object.website"> {{object.website}} </a>
+         <a href="{{object.website}}" target="_blank"> {{object.website}} </a>
       </li>
+
       <br>
+      <h3>Developes for platforms:</h3>
+              {% for platform in object.platform_set.all %}
+                <li><a href="{% url 'gamesdb:platforms_detail' platform.id %}">{{ platform.console_name }}</a></li>
+              {% empty %}
+                <li>Sorry, no platforms for this developer.</li>
+            {% endfor %}
+      <br>
+
       <h3>List of games</h3>
               {% for game in object.game_set.all %}
                 <li><a href="{% url 'gamesdb:games_detail' game.id %}">{{ game.game_title }}</a></li>
