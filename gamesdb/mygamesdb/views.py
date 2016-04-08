@@ -1,4 +1,4 @@
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django.http import HttpResponse
 from django.views.generic.base import TemplateResponseMixin
 from django.core import serializers
@@ -31,13 +31,31 @@ class ConnegResponseMixin(TemplateResponseMixin):
         return super(ConnegResponseMixin, self).render_to_response(context)
 
 
+class GamesList(ListView, ConnegResponseMixin):
+    model = Game
+    queryset = Game.objects.all()
+    context_object_name = 'games'
+    template_name = 'mygamesdb/games_list.html'
+
+
+class DevelopersList(ListView, ConnegResponseMixin):
+    model = Developer
+    queryset = Developer.objects.all()
+    context_object_name = 'developers'
+    template_name = 'mygamesdb/developers_list.html'
+
+
+class PlatformsList(ListView, ConnegResponseMixin):
+    model = Platform
+    queryset = Platform.objects.all()
+    context_object_name = 'platforms'
+    template_name = 'mygamesdb/platforms_list.html'
+
+
 class DeveloperDetail(DetailView, ConnegResponseMixin):
     model = Developer
+    context_object_name = 'platforms'
     template_name = 'mygamesdb/developers_detail.html'
-    # def get_context_data(selfself, **kwargs):
-    # context = super(DeveloperDetail, self).get_context_data(**kwargs)
-    # context['RATINGS_CHOISES'] = Developer.average_videogames_rating
-    # return context
 
 
 class PlatformDetail(DetailView, ConnegResponseMixin):

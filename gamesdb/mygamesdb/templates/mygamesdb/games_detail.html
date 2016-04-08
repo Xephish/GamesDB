@@ -4,16 +4,13 @@
   </head>
   <body>
     <h1>Video Game</h1>
-    <b>Image</b>
+    <h2>{{ object.game_title }}</h2>
     {%	if	object.image	%}
         <p><img	src="{{	object.image.url}}" width="300px"/></p>
     {%	endif	%}
     <ul>
       <li>
         <b>Id:</b> {{ object.id }}
-      </li>
-      <li>
-       <b> Titol:</b> {{ object.game_title }}
       </li>
       <li> <b>Developer:</b>
         <a href="{% url "gamesdb:developers_detail" object.developer.id%}">  {{object.developer.developer_name}} </a>
@@ -32,22 +29,21 @@
         <b>Genere:</b> {{ object.generes }}
       </li>
       <li>
-        <b>Trailer:</b> {{ object.trailer }}
+        <b>Trailer:</b>
+        <a href="object.trailer"> {{object.trailer}} </a>
       </li>
       <li>
-        <b>Publisher:</b> {{ object.publisher }}
-      </li>
-      <li>
-        <b>Puntuacio:</b> {{ object.rating }}
-      </li>
-      <li>
-        <b>Similar_count:</b> {{ object.similar_count }}
+        <b>Rating:</b> {{ object.rating }}
       </li>
       <li>
         <b>Fanart_list:</b> {{ object.fanart_list }}
       </li>
       <li>
         <b>Updates:</b> {{ object.updates }}
+      </li>
+      <li>
+        <b>Website:</b>
+        <a href="object.website"> {{object.website}} </a>
       </li>
     </ul>
     <br>

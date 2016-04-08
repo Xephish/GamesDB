@@ -4,22 +4,29 @@
   </head>
   <body>
     <h1>Developer</h1>
-    <b>Image</b>
+    <h2> {{ object.developer_name }} </h2>
     {%	if	object.image	%}
         <p><img	src="{{	object.image.url}}" width="300px"/></p>
     {%	endif	%}
     <ul>
       <li>
-        <b>Id:</b> {{ object.id_developer }}
+        <b>Id:</b> {{ object.id }}
       </li>
       <li>
-        <b>Nom:</b> {{ object.developer_name }}
+        <b>Fundation year:</b> {{ object.fundation_year }}
       </li>
       <li>
-        <b>Llista de plataformes:</b> {{ object.list_of_platforms }}
+        <b>Founder:</b> {{ object.founder }}
       </li>
       <li>
-        <b>Puntuacio mitjana:</b> {{ object.average_videogames_rating }}
+        <b>Video game genere preferences:</b> {{ object.videogame_genere_preferences }}
+      </li>
+      <li>
+        <b>Average rating:</b> {{ object.average_videogames_rating }}
+      </li>
+       <li>
+        <b>Website:</b>
+         <a href="object.website"> {{object.website}} </a>
       </li>
       <br>
       <h3>List of games</h3>

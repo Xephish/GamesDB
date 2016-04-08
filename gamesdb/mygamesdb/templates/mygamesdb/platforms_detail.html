@@ -4,7 +4,7 @@
   </head>
   <body>
     <h1>Platform</h1>
-    <b>Image</b>
+    <h2>{{ object.console_name }}</h2>
     {%	if	object.image	%}
         <p><img	src="{{	object.image.url}}" width="300px"/></p>
     {%	endif	%}
@@ -14,16 +14,10 @@
         <b>Id:</b> {{ object.id }}
       </li>
       <li>
-        <b>Mame:</b> {{ object.console_name }}
-      </li>
-      <li>
         <b>Controller:</b> {{ object.controller }}
       </li>
       <li>
-        <b>Overview:</b> {{ object.overview }}
-      </li>
-      <li>
-        <b>Developer:</b> {{ object.developer }}
+        <b>Generation:</b> {{ object.generation }}
       </li>
       <li>
         <b>Manufacturer:</b> {{ object.manufacturer }}
@@ -41,13 +35,11 @@
         <b>Sound:</b> {{ object.sound }}
       </li>
       <li>
-        <b>Media:</b> {{ object.media }}
-      </li>
-      <li>
-        <b>Maxcontrollers:</b> {{ object.maxcontrollers }}
-      </li>
-      <li>
         <b>Rating:</b> {{ object.rating }}
+      </li>
+      <li>
+        <b>Website:</b>
+        <a href="object.website"> {{object.website}} </a>
       </li>
     </ul>
     
