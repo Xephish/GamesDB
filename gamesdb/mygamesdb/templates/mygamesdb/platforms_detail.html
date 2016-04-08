@@ -4,6 +4,11 @@
   </head>
   <body>
     <h1>Platform</h1>
+    <b>Image</b>
+    {%	if	object.image	%}
+        <p><img	src="{{	object.image.url}}" width="300px"/></p>
+    {%	endif	%}
+    <ul>
     <ul>
       <li>
         <b>Id:</b> {{ object.id }}
@@ -43,9 +48,6 @@
       </li>
       <li>
         <b>Rating:</b> {{ object.rating }}
-      </li>
-       <li>
-        <b>Images:</b> {{ object.images }}
       </li>
     </ul>
     

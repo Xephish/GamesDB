@@ -4,6 +4,11 @@
   </head>
   <body>
     <h1>Developer</h1>
+    <b>Image</b>
+    {%	if	object.image	%}
+        <p><img	src="{{	object.image.url}}" width="300px"/></p>
+    {%	endif	%}
+    <ul>
       <li>
         <b>Id:</b> {{ object.id_developer }}
       </li>

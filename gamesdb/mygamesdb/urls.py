@@ -41,6 +41,19 @@ urlpatterns	= patterns('',
         PlatformDetail.as_view(),
         name='platforms_detail'),
 
+
+      url(r'^games_api/(?P<pk>[a-zA-Z0-9 ]+)\.(?P<extension>(json|xml|html))/$',
+        GameDetail.as_view(),
+        name='games_detail'),
+
+    url(r'^developers_api/(?P<pk>\d+)\.(?P<extension>(json|xml|html))/$',
+        DeveloperDetail.as_view(),
+        name='developers_detail'),
+
+    url(r'^platforms_api/(?P<pk>[a-zA-Z0-9 ]+)\.(?P<extension>(json|xml|html))/$',
+        PlatformDetail.as_view(),
+        name='platforms_detail'),
+
     # Developers game details, ex/gamesdb/developers/1/games/1
     # url(r'^games/(?P<game>[a-zA-Z0-9 ]+)/developers/(?P<pk>\d+)/$',
     #    DetailView.as_view(

@@ -10,6 +10,7 @@ class Developer(models.Model):
     list_of_games = models.TextField(blank=True, null=True)
     list_of_platforms = models.TextField(blank=True, null=True)
     average_videogames_rating = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to="media", blank=True, null=True)
 
     def __unicode__(self):
         return u"%s" % self.id_developer
@@ -33,7 +34,7 @@ class Platform(models.Model):
     media = models.TextField(blank=True, null=True)
     maxcontrollers = models.TextField(blank=True, null=True)
     rating = models.TextField(blank=True, null=True)
-    images = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to="media", blank=True, null=True)
 
     def __unicode__(self):
         return u"%s" % self.id
@@ -56,6 +57,7 @@ class Game(models.Model):
     similar_count = models.TextField(blank=True, null=True)
     fanart_list = models.TextField(blank=True, null=True)
     updates = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to="media", blank=True, null=True)
 
     def __unicode__(self):
         return u"%s" % self.id
