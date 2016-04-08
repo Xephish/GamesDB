@@ -54,7 +54,6 @@ class Game(models.Model):
     trailer = models.URLField(blank=True, null=True)
     developer = models.ForeignKey(Developer, default=1)
     rating = models.TextField(blank=True, null=True)
-    fanart_list = models.TextField(blank=True, null=True)
     updates = models.TextField(blank=True, null=True)
     website = models.URLField(blank=True, null=True)
     image = models.ImageField(upload_to="media", blank=True, null=True)
