@@ -4,22 +4,50 @@
   </head>
   <body>
     <h1>Developer</h1>
+    <h2> {{ object.developer_name }} </h2>
+    {%	if	object.image	%}
+        <p><img	src="{{	object.image.url}}" width="300px"/></p>
+    {%	endif	%}
     <ul>
       <li>
-        id: {{ object.id_developer }}
+        <b>Id:</b> {{ object.id }}
       </li>
       <li>
-        nom: {{ object.developer_name }}
+        <b>Fundation year:</b> {{ object.fundation_year }}
       </li>
       <li>
-        llista de jocs: {{ object.list_of_games }}
+        <b>Founder:</b> {{ object.founder }}
       </li>
       <li>
-        llista de plataformes: {{ object.list_of_platforms }}
+        <b>Video game genere preferences:</b> {{ object.videogame_genere_preferences }}
       </li>
       <li>
-        puntuacio mitjana: {{ object.average_videogames_rating }}
+        <b>Average rating:</b> {{ object.average_videogames_rating }}
       </li>
-    </ul>
+       <li>
+        <b>Website:</b>
+         <a href="{{object.website}}" target="_blank"> {{object.website}} </a>
+      </li>
+
+      <br>
+      <h3>Developes for platforms:</h3>
+              {% for platform in object.platform_set.all %}
+                <li><a href="{% url 'gamesdb:platforms_detail' platform.id %}">{{ platform.console_name }}</a></li>
+              {% empty %}
+                <li>Sorry, no platforms for this developer.</li>
+            {% endfor %}
+      <br>
+
+      <h3>List of games</h3>
+              {% for game in object.game_set.all %}
+                <li><a href="{% url 'gamesdb:games_detail' game.id %}">{{ game.game_title }}</a></li>
+              {% empty %}
+                <li>Sorry, no games for this developer yet.</li>
+            {% endfor %}
+      <br>
+      <a href='/gamesdb/developers'> More video game developers </a>
+
+      <br>
+      <a href='/gamesdb'> Home </a>
   </body>
 </html>
