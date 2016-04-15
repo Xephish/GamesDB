@@ -1,2 +1,2 @@
 # GamesDB
-description here...
+Video games database
