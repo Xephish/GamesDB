@@ -1,0 +1,20 @@
+Games:
+List of games (main page) xml display --> /gamesdb/api.xml/
+List of games (main page) json display --> /gamesdb/api.json/
+
+Game detail xml display --> /gamesdb/gamesapi/bb.xml/
+Game detail json display --> /gamesdb/gamesapi/bb.json/
+
+Developers:
+List of developers xml display --> /gamesdb/developersapi.xml/
+List of developers json display --> /gamesdb/developersapi.json/
+
+Deveolper detail xml display --> /gamesdb/developersapi/bdnc.xml/
+Deveolper detail json display --> /gamesdb/developersapi/bdnc.json/
+
+Platforms:
+List of platforms xml display --> /gamesdb/platformsapi.xml/
+List of platforms json display --> /gamesdb/platformsapi.json/
+
+Platform detail xml display --> /gamesdb/platformsapi/ps4.xml/
+Platform detail json display --> /gamesdb/platformsapi/ps4.json/
