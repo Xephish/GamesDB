@@ -1,20 +1,23 @@
 <html>
   <head>
-    <title> Platforms </title>
-      <h1> Platforms </h1>
+    <title> GamesDB </title>
+      <h1> GamesDB </h1>
   </head>
   <body>
-    <h2 style="text-indent: 1em">Platforms</h2>
+    <h2 style="text-indent: 1em">Video game platforms</h2>
     {% if platforms %}
     <ul>
     {% for platform in platforms %}
     <li>
-    <a href="{% url "gamesdb:platforms_detail" platform.id%}"> {{platforms.id}} </a>
+    <a href="{% url "gamesdb:platforms_detail" platform.id%}"> {{platform.console_name}} </a>
     </li>
     {% endfor %}
     </ul>
     {% else %}
-    <p style="text-indent: 2em">No hi ha cap platform.</p>
+    <p style="text-indent: 2em">No hi ha cap plataforma</p>
     {% endif %}
+    
+    <br>
+      <a href='/gamesdb'> Home </a>
   </body>
 </html>
