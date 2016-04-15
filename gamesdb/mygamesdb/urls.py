@@ -3,46 +3,57 @@ from django.views.generic import DetailView, ListView
 from models import Game, Developer, Platform
 # from forms import	RestaurantForm,	DishForm
 # from views import RestaurantCreate, DishCreate, RestaurantDetail
-from views import DeveloperDetail, PlatformDetail
+from views import DeveloperDetail, PlatformDetail, GameDetail, GamesList, DevelopersList, PlatformsList
 
-urlpatterns	= patterns('',
-    # List developers list:/gamesdb
+urlpatterns = patterns('',
+
     url(r'^$',
-        ListView.as_view(
-            queryset=Developer.objects.all(),
-            context_object_name='developers',
-            template_name='mygamesdb/developers_list.html'),
+        GamesList.as_view(),
+        name='games_list'),
+
+    url(r'^api\.(?P<extension>(json|xml|html))/$',
+        GamesList.as_view(),
+        name='games_list_api'),
+
+    url(r'^developers/$',
+        DevelopersList.as_view(),
         name='developers_list'),
 
-    # Developer details, ex: /gamesdb/developers/1
-    url(r'^developers/(?P<pk>\d+)/$',
+    url(r'^developersapi\.(?P<extension>(json|xml|html))/$',
+        DevelopersList.as_view(),
+        name='developers_list_api'),
+
+    url(r'^platforms/$',
+        PlatformsList.as_view(),
+        name='platforms_list'),
+
+    url(r'^platformsapi\.(?P<extension>(json|xml|html))/$',
+        PlatformsList.as_view(),
+        name='platforms_list_api'),
+
+    url(r'^games/(?P<pk>[a-zA-Z0-9 ]+)/$',
+        GameDetail.as_view(),
+        name='games_detail'),
+
+    url(r'^developers/(?P<pk>[a-zA-Z0-9 ]+)/$',
         DeveloperDetail.as_view(),
         name='developers_detail'),
 
-    # Developers game details, ex/gamesdb/developers/1/games/1
-    url(r'^developers/(?P<pkr>\d+)/games/(?P<pk>\d+)/$',
-        DetailView.as_view(
-        model=Game,
-        template_name='mygamesdb/games_detail.html'),
-    name='games_detail'),
-
-     # List platforms list :/gamesdb
-    url(r'^$',
-        ListView.as_view(
-            queryset = Platform.objects,
-            context_object_name = 'platforms_list',
-            template_name = 'mygamesdb/platforms_list.html'),
-        name='platforms_list'),
-
-     # Platforms details, ex: /gamesdb/platforms/1
-    url(r'^platforms/(?P<pk>\d+)/$',
+    url(r'^platforms/(?P<pk>[a-zA-Z0-9 ]+)/$',
         PlatformDetail.as_view(),
         name='platforms_detail'),
 
-    # Platforms game details, ex/gamesdb/plaforms/1/games/1
-    url(r'^platforms/(?P<pkr>\d+)/games/(?P<pk>\d+)/$',
-        DetailView.as_view(
-        model=Game,
-        template_name='mygamesdb/games_detail.html'),
-    name='games_detail'),
+    url(r'^gamesapi/(?P<pk>[a-zA-Z0-9 ]+)\.(?P<extension>(json|xml|html))/$',
+        GameDetail.as_view(),
+        name='games_detail_api'),
+
+    url(r'^developersapi/(?P<pk>[a-zA-Z0-9 ]+)\.(?P<extension>(json|xml|html))/$',
+        DeveloperDetail.as_view(),
+        name='developers_detail_api'),
+
+    url(r'^platformsapi/(?P<pk>[a-zA-Z0-9 ]+)\.(?P<extension>(json|xml|html))/$',
+        PlatformDetail.as_view(),
+        name='platforms_detail_api'),
+
+
 )
