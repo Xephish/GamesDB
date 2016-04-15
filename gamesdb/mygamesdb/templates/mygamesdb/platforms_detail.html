@@ -1,55 +1,59 @@
 <html>
   <head>
-    <title>Platform Detail</title>
+    <title>Platforms Detail</title>
   </head>
   <body>
     <h1>Platform</h1>
+    <h2>{{ object.console_name }}</h2>
+    {%	if	object.image	%}
+        <p><img	src="{{	object.image.url}}" width="300px"/></p>
+    {%	endif	%}
+    <ul>
     <ul>
       <li>
-        id: {{ object.id }}
+        <b>Id:</b> {{ object.id }}
       </li>
       <li>
-        nom: {{ object.console_name }}
+        <b>Controller:</b> {{ object.controller }}
       </li>
       <li>
-        mando: {{ object.controller }}
+        <b>Generation:</b> {{ object.generation }}
       </li>
       <li>
-        overview: {{ object.overview }}
+        <b>Manufacturer:</b> {{ object.manufacturer }}
       </li>
       <li>
-        Desenvolupador: {{ object.developer }}
+        <b>Cpu:</b> {{ object.cpu }}
       </li>
       <li>
-        Manufacturador: {{ object.manufacturer }}
+        <b>Memory:</b> {{ object.memory }}
       </li>
       <li>
-        CPU: {{ object.cpu }}
+        <b>Graphics:</b> {{ object.graphics }}
       </li>
       <li>
-        memoria: {{ object.memory }}
+        <b>Sound:</b> {{ object.sound }}
       </li>
       <li>
-        grafics: {{ object.grafics }}
+        <b>Rating:</b> {{ object.rating }}
       </li>
       <li>
-        so: {{ object.sound }}
-      </li>
-      <li>
-        display: {{ object.display }}
-      </li>
-      <li>
-        media: {{ object.media }}
-      </li>
-      <li>
-        maxcontrollers: {{ object.maxcontrollers }}
-      </li>
-      <li>
-        puntuacio: {{ object.rating }}
-      </li>
-      <li>
-        imatges: {{ object.images }}
+        <b>Website:</b>
+        <a href="{{object.website}}" target="_blank"> {{object.website}} </a>
       </li>
     </ul>
+
+    <h3>List of games</h3>
+              {% for game in object.game_set.all %}
+                <li><a href="{% url 'gamesdb:games_detail' game.id %}" >{{ game.game_title }}</a></li>
+              {% empty %}
+                <li>Sorry, no games for this platform yet.</li>
+            {% endfor %}
+    
+    <br>
+      <a href='/gamesdb/platforms'> More video game platforms </a>
+
+      <br>
+      <a href='/gamesdb'> Home </a>
   </body>
 </html>
