@@ -4,46 +4,46 @@
   </head>
   <body>
     <h1>Video Game</h1>
+    <h2>{{ object.game_title }}</h2>
+    {%	if	object.image	%}
+        <p><img	src="{{	object.image.url}}" width="300px"/></p>
+    {%	endif	%}
     <ul>
       <li>
-        id: {{ object.id }}
+        <b>Id:</b> {{ object.id }}
+      </li>
+      <li> <b>Developer:</b>
+        <a href="{% url "gamesdb:developers_detail" object.developer.id%}">  {{object.developer.developer_name}} </a>
       </li>
       <li>
-        titol: {{ object.game_title }}
+        <b>Plataforma:</b>
+        <a href="{% url "gamesdb:platforms_detail" object.platform.id%}">  {{object.platform.console_name}} </a>
       </li>
       <li>
-        plataforma: {{ object.platform }}
+        <b>Data de sortida:</b> {{ object.release_date }}
       </li>
       <li>
-        Data de sortida: {{ object.release_date }}
+        <b>ESRB:</b> {{ object.ESRB }}
       </li>
       <li>
-        ESRB: {{ object.ESRB }}
+        <b>Genere:</b> {{ object.generes }}
       </li>
       <li>
-        genere: {{ object.generes }}
+        <b>Trailer:</b>
+        <a href="{{object.trailer}}" target="_blank"> {{object.trailer}} </a>
       </li>
       <li>
-        trailer: {{ object.trailer }}
+        <b>Rating:</b> {{ object.rating }}
       </li>
       <li>
-        publisher: {{ object.publisher }}
+        <b>Updates:</b> {{ object.updates }}
       </li>
       <li>
-        Desenvolupador: {{ object.developer }}
-      </li>
-      <li>
-        puntuacio: {{ object.rating }}
-      </li>
-      <li>
-        similar_count: {{ object.similar_count }}
-      </li>
-      <li>
-        fanart_list: {{ object.fanart_list }}
-      </li>
-      <li>
-        updates: {{ object.updates }}
+        <b>Website:</b>
+        <a href="{{object.website}}" target="_blank"  > {{object.website}} </a>
       </li>
     </ul>
+    <br>
+    <a href='/gamesdb'> Home </a>
   </body>
 </html>
