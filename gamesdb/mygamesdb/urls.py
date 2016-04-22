@@ -3,7 +3,7 @@ from django.views.generic import DetailView, ListView
 from models import Game, Developer, Platform
 # from forms import	RestaurantForm,	DishForm
 # from views import RestaurantCreate, DishCreate, RestaurantDetail
-from views import DeveloperDetail, PlatformDetail, GameDetail, GamesList, DevelopersList, PlatformsList
+from views import *
 
 urlpatterns = patterns('',
 
@@ -55,5 +55,7 @@ urlpatterns = patterns('',
         PlatformDetail.as_view(),
         name='platforms_detail_api'),
 
-
+    url(r'^gamesdb/create/$',
+        GameCreate.as_view(),
+        name='game_create'),
 )

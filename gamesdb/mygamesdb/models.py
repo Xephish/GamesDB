@@ -18,7 +18,7 @@ class Developer(models.Model):
         return u"%s" % self.id
 
     def get_absolute_url(self):
-        return reverse('mygamesdb:developers_detail', kwargs={'pk': self.pk})
+        return reverse('gamesdb:developers_detail', kwargs={'pk': self.pk})
 
 
 class Platform(models.Model):
@@ -41,7 +41,7 @@ class Platform(models.Model):
         return u"%s" % self.id
 
     def get_absolute_url(self):
-        return reverse('mygamesdb:platform_detail', kwargs={'pk': self.pk})
+        return reverse('gamesdb:platform_detail', kwargs={'pk': self.pk})
 
 
 class Game(models.Model):
@@ -62,4 +62,4 @@ class Game(models.Model):
         return u"%s" % self.id
 
     def get_absolute_url(self):
-        return reverse('mygamesdb:games_detail', kwargs={'pk': self.pk})
+        return reverse('gamesdb:games_detail', kwargs={'pk': self.pk})

@@ -16,10 +16,15 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls import patterns
+from django.contrib.auth.views import login, logout
+from mygamesdb.views import*
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', mainpage),
     url(r'^gamesdb/', include('mygamesdb.urls', namespace = 'gamesdb')),
+    url(r'^accounts/login/$', login, name='login'),
+    url(r'^accounts/logout/$', logout, name='logout'),
 ]
 
 

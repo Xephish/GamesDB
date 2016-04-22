@@ -2,8 +2,11 @@ from django.views.generic import DetailView, ListView
 from django.http import HttpResponse
 from django.views.generic.base import TemplateResponseMixin
 from django.core import serializers
+from django.shortcuts import render
+from django.views.generic.edit import CreateView
 
 from models import Developer, Platform, Game
+from forms import *
 
 
 # from forms import	RestaurantForm,	DishForm
@@ -29,6 +32,10 @@ class ConnegResponseMixin(TemplateResponseMixin):
             elif self.kwargs['extension'] == 'xml':
                 return self.render_xml_object_response(objects=objects)
         return super(ConnegResponseMixin, self).render_to_response(context)
+
+
+def mainpage(request):
+    return render(request, 'mygamesdb/mainpage.html')
 
 
 class GamesList(ListView, ConnegResponseMixin):
@@ -66,3 +73,13 @@ class PlatformDetail(DetailView, ConnegResponseMixin):
 class GameDetail(DetailView, ConnegResponseMixin):
     model = Game
     template_name = 'mygamesdb/games_detail.html'
+
+
+class GameCreate(CreateView):
+    model = Game
+    template_name = 'mygamesdb/form.html'
+    form_class = GameForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(GameCreate, self).form_valid(form)
