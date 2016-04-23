@@ -19,6 +19,7 @@ from django.conf.urls import patterns
 from django.contrib.auth.views import login, logout
 from mygamesdb.views import*
 
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', mainpage),
@@ -29,7 +30,7 @@ urlpatterns = [
 
 
 if settings.DEBUG:
-    urlpatterns += patterns('',
+    urlpatterns += [
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
-            {'document_root': settings.MEDIA_ROOT, }),
-        )
+            {'document_root': settings.MEDIA_ROOT, })
+    ]

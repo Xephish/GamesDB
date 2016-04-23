@@ -9,7 +9,7 @@
     {% else %}
         <p><a href="{% url 'login' %}?next={{request.path}}">login</a></p>{% endif %}
   {% endblock %}
-  <body>
+  <body background="https://images5.alphacoders.com/438/438934.jpg">
     <h2 style="text-indent: 1em">Video games
     {% if user %}(<a href="{% url 'gamesdb:game_create' %}">add</a>){% endif %}
     </h2>

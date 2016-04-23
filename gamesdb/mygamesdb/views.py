@@ -59,6 +59,11 @@ class PlatformsList(ListView, ConnegResponseMixin):
     template_name = 'mygamesdb/platforms_list.html'
 
 
+class GameDetail(DetailView, ConnegResponseMixin):
+    model = Game
+    template_name = 'mygamesdb/games_detail.html'
+
+
 class DeveloperDetail(DetailView, ConnegResponseMixin):
     model = Developer
     context_object_name = 'platforms'
@@ -70,11 +75,6 @@ class PlatformDetail(DetailView, ConnegResponseMixin):
     template_name = 'mygamesdb/platforms_detail.html'
 
 
-class GameDetail(DetailView, ConnegResponseMixin):
-    model = Game
-    template_name = 'mygamesdb/games_detail.html'
-
-
 class GameCreate(CreateView):
     model = Game
     template_name = 'mygamesdb/form.html'
@@ -83,3 +83,23 @@ class GameCreate(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(GameCreate, self).form_valid(form)
+
+
+class DeveloperCreate(CreateView):
+    model = Developer
+    template_name = 'mygamesdb/form.html'
+    form_class = DeveloperForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(DeveloperCreate, self).form_valid(form)
+
+
+class PlatformCreate(CreateView):
+    model = Platform
+    template_name = 'mygamesdb/form.html'
+    form_class = PlatformForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(PlatformCreate, self).form_valid(form)

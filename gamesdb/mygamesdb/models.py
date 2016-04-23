@@ -41,7 +41,7 @@ class Platform(models.Model):
         return u"%s" % self.id
 
     def get_absolute_url(self):
-        return reverse('gamesdb:platform_detail', kwargs={'pk': self.pk})
+        return reverse('gamesdb:platforms_detail', kwargs={'pk': self.pk})
 
 
 class Game(models.Model):

@@ -4,7 +4,9 @@
       <h1> GamesDB </h1>
   </head>
   <body>
-    <h2 style="text-indent: 1em">Video game platforms</h2>
+    <h2 style="text-indent: 1em">Video game platforms
+    {% if user %}(<a href="{% url 'gamesdb:platform_create' %}">add</a>){% endif %}
+    </h2>
     {% if platforms %}
     <ul>
     {% for platform in platforms %}

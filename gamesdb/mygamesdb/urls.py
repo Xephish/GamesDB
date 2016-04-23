@@ -5,7 +5,7 @@ from models import Game, Developer, Platform
 # from views import RestaurantCreate, DishCreate, RestaurantDetail
 from views import *
 
-urlpatterns = patterns('',
+urlpatterns = [
 
     url(r'^$',
         GamesList.as_view(),
@@ -58,4 +58,12 @@ urlpatterns = patterns('',
     url(r'^gamesdb/create/$',
         GameCreate.as_view(),
         name='game_create'),
-)
+
+    url(r'^gamesdb/developers/create/$',
+        DeveloperCreate.as_view(),
+        name='developer_create'),
+
+    url(r'^gamesdb/platforms/create/$',
+        PlatformCreate.as_view(),
+        name='platform_create'),
+]

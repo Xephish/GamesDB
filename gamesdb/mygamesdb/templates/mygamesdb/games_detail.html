@@ -2,11 +2,11 @@
   <head>
     <title>Video Games Detail</title>
   </head>
-  <body>
+  <body background="{{object.image.url}}">
     <h1>Video Game</h1>
     <h2>{{ object.game_title }}</h2>
     {%	if	object.image	%}
-        <p><img	src="{{	object.image.url}}" width="300px"/></p>
+        <p><img	src="{{object.image.url}}" width="300px"/></p>
     {%	endif	%}
     <ul>
       <li>

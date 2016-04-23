@@ -4,7 +4,9 @@
       <h1> GamesDB </h1>
   </head>
   <body>
-    <h2 style="text-indent: 1em">Video game developers</h2>
+    <h2 style="text-indent: 1em">Video game developers
+    {% if user %}(<a href="{% url 'gamesdb:developer_create' %}">add</a>){% endif %}
+    </h2>
     {% if developers %}
     <ul>
     {% for developer in developers %}
