@@ -1,8 +1,6 @@
 from django.conf.urls import patterns, url
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, UpdateView
 from models import Game, Developer, Platform
-# from forms import	RestaurantForm,	DishForm
-# from views import RestaurantCreate, DishCreate, RestaurantDetail
 from views import *
 
 urlpatterns = [
@@ -42,6 +40,13 @@ urlpatterns = [
     url(r'^platforms/(?P<pk>[a-zA-Z0-9 ]+)/$',
         PlatformDetail.as_view(),
         name='platforms_detail'),
+
+    url(r'^games/(?P<pk>[a-zA-Z0-9 ]+)/edit/$',
+        UpdateView.as_view(
+            model=Game,
+            template_name='mygamesdb/form.html',
+            form_class=GameForm),
+        name='game_edit'),
 
     url(r'^gamesapi/(?P<pk>[a-zA-Z0-9 ]+)\.(?P<extension>(json|xml|html))/$',
         GameDetail.as_view(),

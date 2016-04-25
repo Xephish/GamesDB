@@ -4,6 +4,7 @@
   </head>
   <body background="{{object.image.url}}">
     <h1>Video Game</h1>
+    <a href="{% url 'gamesdb:game_edit' object.id %}">edit</a>
     <h2>{{ object.game_title }}</h2>
     {%	if	object.image	%}
         <p><img	src="{{object.image.url}}" width="300px"/></p>

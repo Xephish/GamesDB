@@ -9,8 +9,6 @@ from models import Developer, Platform, Game
 from forms import *
 
 
-# from forms import	RestaurantForm,	DishForm
-
 class ConnegResponseMixin(TemplateResponseMixin):
 
     def render_json_object_response(self, objects, **kwargs):
@@ -61,17 +59,19 @@ class PlatformsList(ListView, ConnegResponseMixin):
 
 class GameDetail(DetailView, ConnegResponseMixin):
     model = Game
+    context_object_name = 'game'
     template_name = 'mygamesdb/games_detail.html'
 
 
 class DeveloperDetail(DetailView, ConnegResponseMixin):
     model = Developer
-    context_object_name = 'platforms'
+    context_object_name = 'developer'
     template_name = 'mygamesdb/developers_detail.html'
 
 
 class PlatformDetail(DetailView, ConnegResponseMixin):
     model = Platform
+    context_object_name = 'platform'
     template_name = 'mygamesdb/platforms_detail.html'
 
 
