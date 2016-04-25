@@ -48,6 +48,20 @@ urlpatterns = [
             form_class=GameForm),
         name='game_edit'),
 
+    url(r'^developers/(?P<pk>[a-zA-Z0-9 ]+)/edit/$',
+        UpdateView.as_view(
+            model=Developer,
+            template_name='mygamesdb/form.html',
+            form_class=DeveloperForm),
+        name='developer_edit'),
+
+    url(r'^platforms/(?P<pk>[a-zA-Z0-9 ]+)/edit/$',
+        UpdateView.as_view(
+            model=Platform,
+            template_name='mygamesdb/form.html',
+            form_class=PlatformForm),
+        name='platform_edit'),
+
     url(r'^gamesapi/(?P<pk>[a-zA-Z0-9 ]+)\.(?P<extension>(json|xml|html))/$',
         GameDetail.as_view(),
         name='games_detail_api'),
