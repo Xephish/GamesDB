@@ -5,6 +5,7 @@
   <body>
     <h1>Platform
         (<a href="{% url 'gamesdb:platform_edit' object.id %}">edit</a>)
+        (<a href="{% url 'gamesdb:platform_delete' object.id %}">delete</a>)
     </h1>
     <h2>{{ object.console_name }}</h2>
     {%	if	object.image	%}

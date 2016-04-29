@@ -3,12 +3,17 @@
     <title>Developers</title>
   </head>
   <body>
+  <h2>{{ user }}</h2>
+  <h2>{{ object.ins_creator }}</h2>
     <h1>Developer
-        (<a href="{% url 'gamesdb:developer_edit' object.id %}">edit</a>)
+        {% if user == object.ins_creator %}
+            (<a href="{% url 'gamesdb:developer_edit' object.id %}">edit</a>)
+            (<a href="{% url 'gamesdb:developer_delete' object.id %}">delete</a>)
+        {% endif %}
     </h1>
     <h2> {{ object.developer_name }} </h2>
     {%	if	object.image	%}
-        <p><img	src="{{	object.image.url}}" width="300px"/></p>
+        <p><img	src="{{object.image.url}}" width="300px"/></p>
     {%	endif	%}
     <ul>
       <li>

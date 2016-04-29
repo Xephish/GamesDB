@@ -13,7 +13,7 @@ class Developer(models.Model):
     average_videogames_rating = models.TextField(blank=True, null=True)
     website = models.URLField(blank=True, null=True)
     image = models.ImageField(upload_to="media", blank=True, null=True)
-    ins_creator = models.TextField()
+    ins_creator = models.ForeignKey(User, default=1)
 
     def __unicode__(self):
         return u"%s" % self.id
@@ -37,7 +37,7 @@ class Platform(models.Model):
     rating = models.TextField(blank=True, null=True)
     website = models.URLField(blank=True, null=True)
     image = models.ImageField(upload_to="media", blank=True, null=True)
-    ins_creator = models.TextField()
+    ins_creator = models.ForeignKey(User, default=1)
 
     def __unicode__(self):
         return u"%s" % self.id
@@ -59,7 +59,7 @@ class Game(models.Model):
     updates = models.TextField(blank=True, null=True)
     website = models.URLField(blank=True, null=True)
     image = models.ImageField(upload_to="media", blank=True, null=True)
-    ins_creator = models.TextField()
+    ins_creator = models.ForeignKey(User, default=1)
 
     def __unicode__(self):
         return u"%s" % self.id

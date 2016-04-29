@@ -18,6 +18,7 @@ from django.conf import settings
 from django.conf.urls import patterns
 from django.contrib.auth.views import login, logout
 from mygamesdb.views import*
+from django.contrib.auth.forms import UserCreationForm
 
 
 urlpatterns = [
@@ -26,6 +27,10 @@ urlpatterns = [
     url(r'^gamesdb/', include('mygamesdb.urls', namespace = 'gamesdb')),
     url(r'^accounts/login/$', login, name='login'),
     url(r'^accounts/logout/$', logout, name='logout'),
+    url('^register/', CreateView.as_view(
+        template_name='register.html',
+        form_class=UserCreationForm,
+        success_url='/gamesdb/'),name='register'),
 ]
 
 

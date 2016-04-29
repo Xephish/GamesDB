@@ -2,6 +2,7 @@ from django.conf.urls import patterns, url
 from django.views.generic import DetailView, ListView, UpdateView
 from models import Game, Developer, Platform
 from views import *
+from mygamesdb import views
 
 urlpatterns = [
 
@@ -85,4 +86,20 @@ urlpatterns = [
     url(r'^gamesdb/platforms/create/$',
         PlatformCreate.as_view(),
         name='platform_create'),
+
+    url(r'^games/(?P<pk>[a-zA-Z0-9 ]+)/delete/$',
+        GameDelete.as_view(),
+        name='game_delete'),
+
+    url(r'^developers/(?P<pk>[a-zA-Z0-9 ]+)/delete/$',
+        DeveloperDelete.as_view(),
+        name='developer_delete'),
+
+    url(r'^platforms/(?P<pk>[a-zA-Z0-9 ]+)/delete/$',
+        PlatformDelete.as_view(),
+        name='platform_delete'),
+
+    # url(r'^delete_game/(?P<pk>\d+)/$',
+    #     'views.delete_game',
+    #     name='delete_game')
 ]

@@ -4,7 +4,9 @@ from django.views.generic.base import TemplateResponseMixin
 from django.core import serializers
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
-
+from django.shortcuts import redirect
+from django.views.generic.edit import DeleteView
+from django.core.urlresolvers import reverse_lazy
 from models import Developer, Platform, Game
 from forms import *
 
@@ -81,7 +83,7 @@ class GameCreate(CreateView):
     form_class = GameForm
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        form.instance.ins_creator = self.request.user
         return super(GameCreate, self).form_valid(form)
 
 
@@ -103,3 +105,24 @@ class PlatformCreate(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(PlatformCreate, self).form_valid(form)
+
+
+class GameDelete(DeleteView):
+    model = Game
+    success_url = reverse_lazy('gamesdb:games_list')
+
+
+class DeveloperDelete(DeleteView):
+    model = Developer
+    success_url = reverse_lazy('gamesdb:developers_list')
+
+
+class PlatformDelete(DeleteView):
+    model = Platform
+    success_url = reverse_lazy('gamesdb:platforms_list')
+
+
+# def delete_game(request,rest_pk):
+#     delete_obj = Game.objects.get(pk=pk)
+#     delete_obj.delete()
+#     return redirect('http://127.0.0.1:8000/gamesdb/')

@@ -2,9 +2,13 @@
   <head>
     <title>Video Games Detail</title>
   </head>
-  <body background="{{object.image.url}}">
+  <body>
+
     <h1>Video Game
-        (<a href="{% url 'gamesdb:game_edit' object.id %}">edit</a>)
+        {% if user == object.ins_creator %}
+            (<a href="{% url 'gamesdb:game_edit' object.id %}">edit</a>)
+            (<a href="{% url 'gamesdb:game_delete' object.id %}">delete</a>)
+        {% endif %}
     </h1>
     <h2>{{ object.game_title }}</h2>
     {%	if	object.image	%}
@@ -18,17 +22,17 @@
         <a href="{% url "gamesdb:developers_detail" object.developer.id%}">  {{object.developer.developer_name}} </a>
       </li>
       <li>
-        <b>Plataforma:</b>
+        <b>Platform:</b>
         <a href="{% url "gamesdb:platforms_detail" object.platform.id%}">  {{object.platform.console_name}} </a>
       </li>
       <li>
-        <b>Data de sortida:</b> {{ object.release_date }}
+        <b>Release date:</b> {{ object.release_date }}
       </li>
       <li>
         <b>ESRB:</b> {{ object.ESRB }}
       </li>
       <li>
-        <b>Genere:</b> {{ object.generes }}
+        <b>Genre:</b> {{ object.generes }}
       </li>
       <li>
         <b>Trailer:</b>
