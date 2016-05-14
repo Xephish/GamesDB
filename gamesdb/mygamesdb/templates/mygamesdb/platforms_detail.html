@@ -4,11 +4,13 @@
   </head>
   <body>
     <h1>Platform
-        (<a href="{% url 'gamesdb:platform_edit' object.id %}">edit</a>)
-        (<a href="{% url 'gamesdb:platform_delete' object.id %}">delete</a>)
+        {% if user == object.ins_creator %}
+            (<a href="{% url 'gamesdb:platform_edit' object.id %}">edit</a>)
+            (<a href="{% url 'gamesdb:platform_delete' object.id %}">delete</a>)
+        {% endif %}
     </h1>
     <h2>{{ object.console_name }}</h2>
-    {%	if	object.image	%}
+    {%	if object.image %}
         <p><img	src="{{object.image.url}}" width="300px"/></p>
     {%	endif	%}
     <ul>
@@ -52,7 +54,8 @@
               {% empty %}
                 <li>Sorry, no games for this platform yet.</li>
             {% endfor %}
-    
+
+    <p> Post created by {{ object.ins_creator }}</p>
     <br>
       <a href='/gamesdb/platforms'> More video game platforms </a>
 

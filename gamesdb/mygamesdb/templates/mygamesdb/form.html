@@ -1,5 +1,41 @@
+<head>
+    <link rel="stylesheet"
+        href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"	/>
+    <script	src="http://code.jquery.com/jquery-2.2.3.js"></script>
+    <script	src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 {% block content %}
+
+    <script>
+        $(function(){
+           var	genres = ["rol playing game", "first person shooter","first person action",	"terror"];
+              $("#id_generes").autocomplete({
+                source:	genres
+           });
+
+
+            $("#id_game_title").autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: "http://thegamesdb.net/api/GetGamesList.php?name=",
+                        dataType: "xml",
+                        data: {
+                            maxRows: 5,
+                            name_startsWith: request.term,
+                        },
+                        success: function( data ) {
+                            response( $.map( data.GameTitle, function( item ) {
+                                return {
+                                    label: item.GameTitle,
+                                    value: item.GameTitle
+                                }
+                            }));
+                        }
+                    });
+                },
+            });
+        });
+    </script>
     <form method="post" enctype="multipart/form-data" action="">
         {% csrf_token %}
         <table>

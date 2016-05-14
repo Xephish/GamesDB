@@ -3,12 +3,15 @@ from django.http import HttpResponse
 from django.views.generic.base import TemplateResponseMixin
 from django.core import serializers
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.shortcuts import redirect
 from django.views.generic.edit import DeleteView
 from django.core.urlresolvers import reverse_lazy
 from models import Developer, Platform, Game
 from forms import *
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+from django.utils.decorators import method_decorator
 
 
 class ConnegResponseMixin(TemplateResponseMixin):
@@ -32,6 +35,24 @@ class ConnegResponseMixin(TemplateResponseMixin):
             elif self.kwargs['extension'] == 'xml':
                 return self.render_xml_object_response(objects=objects)
         return super(ConnegResponseMixin, self).render_to_response(context)
+
+
+class LoginRequiredMixin(object):
+    @method_decorator(login_required())
+    def dispatch(self, *args, **kwargs):
+        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
+
+
+class CheckIsOwnerMixin(object):
+    def get_object(self, *args, **kwargs):
+        obj = super(CheckIsOwnerMixin, self).get_object(*args, **kwargs)
+        if not obj.ins_creator == self.request.user:
+            raise PermissionDenied
+        return obj
+
+
+class LoginRequiredCheckIsOwnerUpdateView(LoginRequiredMixin, CheckIsOwnerMixin, UpdateView):
+    template_name = 'mygamesdb/form.html'
 
 
 def mainpage(request):
@@ -77,7 +98,7 @@ class PlatformDetail(DetailView, ConnegResponseMixin):
     template_name = 'mygamesdb/platforms_detail.html'
 
 
-class GameCreate(CreateView):
+class GameCreate(LoginRequiredMixin, CreateView):
     model = Game
     template_name = 'mygamesdb/form.html'
     form_class = GameForm
@@ -87,7 +108,7 @@ class GameCreate(CreateView):
         return super(GameCreate, self).form_valid(form)
 
 
-class DeveloperCreate(CreateView):
+class DeveloperCreate(LoginRequiredMixin, CreateView):
     model = Developer
     template_name = 'mygamesdb/form.html'
     form_class = DeveloperForm
@@ -97,7 +118,7 @@ class DeveloperCreate(CreateView):
         return super(DeveloperCreate, self).form_valid(form)
 
 
-class PlatformCreate(CreateView):
+class PlatformCreate(LoginRequiredMixin, CreateView):
     model = Platform
     template_name = 'mygamesdb/form.html'
     form_class = PlatformForm
@@ -107,17 +128,17 @@ class PlatformCreate(CreateView):
         return super(PlatformCreate, self).form_valid(form)
 
 
-class GameDelete(DeleteView):
+class GameDelete(LoginRequiredMixin, CheckIsOwnerMixin, DeleteView):
     model = Game
     success_url = reverse_lazy('gamesdb:games_list')
 
 
-class DeveloperDelete(DeleteView):
+class DeveloperDelete(LoginRequiredMixin, CheckIsOwnerMixin, DeleteView):
     model = Developer
     success_url = reverse_lazy('gamesdb:developers_list')
 
 
-class PlatformDelete(DeleteView):
+class PlatformDelete(LoginRequiredMixin, CheckIsOwnerMixin, DeleteView):
     model = Platform
     success_url = reverse_lazy('gamesdb:platforms_list')
 

@@ -43,21 +43,21 @@ urlpatterns = [
         name='platforms_detail'),
 
     url(r'^games/(?P<pk>[a-zA-Z0-9 ]+)/edit/$',
-        UpdateView.as_view(
+        LoginRequiredCheckIsOwnerUpdateView.as_view(
             model=Game,
             template_name='mygamesdb/form.html',
             form_class=GameForm),
         name='game_edit'),
 
     url(r'^developers/(?P<pk>[a-zA-Z0-9 ]+)/edit/$',
-        UpdateView.as_view(
+        LoginRequiredCheckIsOwnerUpdateView.as_view(
             model=Developer,
             template_name='mygamesdb/form.html',
             form_class=DeveloperForm),
         name='developer_edit'),
 
     url(r'^platforms/(?P<pk>[a-zA-Z0-9 ]+)/edit/$',
-        UpdateView.as_view(
+        LoginRequiredCheckIsOwnerUpdateView.as_view(
             model=Platform,
             template_name='mygamesdb/form.html',
             form_class=PlatformForm),

@@ -3,8 +3,6 @@
     <title>Developers</title>
   </head>
   <body>
-  <h2>{{ user }}</h2>
-  <h2>{{ object.ins_creator }}</h2>
     <h1>Developer
         {% if user == object.ins_creator %}
             (<a href="{% url 'gamesdb:developer_edit' object.id %}">edit</a>)
@@ -51,6 +49,7 @@
               {% empty %}
                 <li>Sorry, no games for this developer yet.</li>
             {% endfor %}
+    <p> Post created by {{ object.ins_creator }}</p>
       <br>
       <a href='/gamesdb/developers'> More video game developers </a>
 
