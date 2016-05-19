@@ -5,7 +5,7 @@
     <script	src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 {% block content %}
-
+<
     <script>
         $(function(){
            var	genres = ["rol playing game", "first person shooter","first person action",	"terror"];
@@ -14,25 +14,36 @@
            });
 
 
-            $("#id_game_title").autocomplete({
+            $("#id_city").autocomplete({
                 source: function(request, response) {
                     $.ajax({
-                        url: "http://thegamesdb.net/api/GetGamesList.php?name=",
-                        dataType: "xml",
+                        url: "http://ws.geonames.org/searchJSON",
+                        dataType: "jsonp",
                         data: {
-                            maxRows: 5,
+                            featureClass: "P",
+                            maxRows: 10,
                             name_startsWith: request.term,
+                            username: "demo"
                         },
                         success: function( data ) {
-                            response( $.map( data.GameTitle, function( item ) {
+                            response( $.map( data.geonames, function( item ) {
                                 return {
-                                    label: item.GameTitle,
-                                    value: item.GameTitle
+                                    label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+                                    value: item.name,
+                                    provinceName: item.adminName1,
+                                    countryName: item.countryName
                                 }
                             }));
                         }
                     });
                 },
+                minLength: 2,
+                select: function( event, ui) {
+                    if (ui.item) {
+                        $("#id_province_or_state").val(ui.item.provinceName);
+                        $("#id_country").val(ui.item.countryName);
+                    }
+                }
             });
         });
     </script>

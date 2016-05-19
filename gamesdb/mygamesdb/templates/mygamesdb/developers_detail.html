@@ -10,7 +10,7 @@
         {% endif %}
     </h1>
     <h2> {{ object.developer_name }} </h2>
-    {%	if	object.image	%}
+    {%	if object.image %}
         <p><img	src="{{object.image.url}}" width="300px"/></p>
     {%	endif	%}
     <ul>
@@ -22,6 +22,15 @@
       </li>
       <li>
         <b>Founder:</b> {{ object.founder }}
+      </li>
+      <li>
+        <b>City:</b> {{ object.city }}
+      </li>
+      <li>
+        <b>Province or State:</b> {{ object.province_or_state }}
+      </li>
+      <li>
+        <b>Country:</b> {{ object.country }}
       </li>
       <li>
         <b>Video game genere preferences:</b> {{ object.videogame_genere_preferences }}
@@ -49,7 +58,6 @@
               {% empty %}
                 <li>Sorry, no games for this developer yet.</li>
             {% endfor %}
-    <p> Post created by {{ object.ins_creator }}</p>
       <br>
       <a href='/gamesdb/developers'> More video game developers </a>
 
