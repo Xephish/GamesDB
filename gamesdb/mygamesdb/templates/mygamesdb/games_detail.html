@@ -3,53 +3,88 @@
     <title>Video Games Detail</title>
   </head>
   <body>
-
-    <h1>Video Game
+  <span vocab="http://schema.org/" typeof="VideoGame">
+    <h1><span property="applicationCategory">Video Game</span>
         {% if user == object.ins_creator %}
             (<a href="{% url 'gamesdb:game_edit' object.id %}">edit</a>)
             (<a href="{% url 'gamesdb:game_delete' object.id %}">delete</a>)
         {% endif %}
     </h1>
-    <h2>{{ object.game_title }}</h2>
-    {%	if	object.image	%}
-        <p><img	src="{{object.image.url}}" width="300px"/></p>
+        <span property="name"><h2>{{ object.game_title }}</h2> </span>
+    {% if object.image %}
+    	<span rel="image">
+      <span vocab="http://schema.org/" typeof="ImageObject">
+        <p><img	src="{{object.image.url}}" width="300px"/></p></span></span>
     {%	endif	%}
     <ul>
       <li>
         <b>Id:</b> {{ object.id }}
       </li>
       <li> <b>Developer:</b>
-        <a href="{% url "gamesdb:developers_detail" object.developer.id%}">  {{object.developer.developer_name}} </a>
+      <span rel="producer">
+      <span vocab="http://schema.org/" typeof="Organization">
+      <span property="name">
+       <a href="{% url "gamesdb:developers_detail" object.developer.id%}">  {{object.developer.developer_name}} </a></span></span></span>
       </li>
       <li>
         <b>Platform:</b>
+        <span property="gamePlatform">
         <a href="{% url "gamesdb:platforms_detail" object.platform.id%}">  {{object.platform.console_name}} </a>
+           </span>
       </li>
       <li>
-        <b>Release date:</b> {{ object.release_date }}
+        <b>Release date:</b> <span property="dateCreated">{{ object.release_date }}</span>
       </li>
       <li>
-        <b>ESRB:</b> {{ object.ESRB }}
+       <b>ESRB:</b> <span property="contentRating">{{ object.ESRB }}</span>
       </li>
       <li>
-        <b>Genre:</b> {{ object.generes }}
+        <b>Genre:</b> <span property="genre">{{ object.generes }}</span>
       </li>
       <li>
         <b>Trailer:</b>
         <a href="{{object.trailer}}" target="_blank"> {{object.trailer}} </a>
       </li>
       <li>
-        <b>Rating:</b> {{ object.rating }}
-      </li>
-      <li>
-        <b>Updates:</b> {{ object.updates }}
+        <b>Updates:</b> <span property="version">{{ object.updates }}</span>
       </li>
       <li>
         <b>Website:</b>
-        <a href="{{object.website}}" target="_blank"  > {{object.website}} </a>
+        <span property="gameLocation"><a href="{{object.website}}" target="_blank"  > {{object.website}} </a></span>
       </li>
+    <h3>Rating</h3>
+    {% if object.gamereview_set.all|length > 0 %}
+    <span rel="aggregateRating">
+         <p typeof="AggregateRating">
+         <b>Average rating:</b>
+        <span property="ratingValue">{{ object.average_rating|stringformat:".1f" }}</span>
+         {% with object.gamereview_set.all|length as reviewCount %}
+         (<span property="reviewCount">{{ reviewCount }}
+        </span> vote{{ reviewCount|pluralize }} done)
+         {% endwith %}
+         </p>
+    </span>
+        {% else %}
+        <p>No votes yet</p>
+    {%  endif %}
+        <form action="{% url 'gamesdb:review_create' object.id %}" method="post">
+        {% csrf_token %}
+        <p><b>Vote:</b></p>
+        <p>{% for rate in RATING_CHOICES %}
+            <input type="radio" name="rating" id="rating{{ forloop.counter }}" value="{{ rate.0 }}" />
+            <label for="choice{{ forloop.counter }}">{{ rate.1 }} star{{ rate.0|pluralize }}</label>
+        <br/>{% endfor %}
+        </p>
+        <input type="submit" value="Review" />
+        </form>
     </ul>
-    <p> Post created by {{ object.ins_creator }}</p>
+     <span rel="author">
+      <span vocab="http://schema.org/" typeof="Person">
+
+    <p> Post created by <span property="name">{{ object.ins_creator }}</p>
+    </span></span></span>
+
+    </span>
     <br>
     <a href='/gamesdb'> Home </a>
   </body>

@@ -99,6 +99,10 @@ urlpatterns = [
         PlatformDelete.as_view(),
         name='platform_delete'),
 
+    url(r'^games/(?P<pk>[a-zA-Z0-9 ]+)/reviews/create/$',
+        review,
+        name='review_create'),
+
     # url(r'^delete_game/(?P<pk>\d+)/$',
     #     'views.delete_game',
     #     name='delete_game')

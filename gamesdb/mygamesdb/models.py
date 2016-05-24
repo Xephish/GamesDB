@@ -1,7 +1,7 @@
 from django.db import models
-from	django.contrib.auth.models	import	User
-from	django.core.urlresolvers	import	reverse
-from	datetime	import	date
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from datetime import date
 
 
 class Developer(models.Model):
@@ -69,3 +69,19 @@ class Game(models.Model):
 
     def get_absolute_url(self):
         return reverse('gamesdb:games_detail', kwargs={'pk': self.pk})
+
+    def average_rating(self):
+        ratingSum = sum([float(review.rating) for review in self.gamereview_set.all()])
+        reviewCount = self.gamereview_set.count()
+        return ratingSum / reviewCount
+
+
+class Review(models.Model):
+    RATING_CHOICES = ((1, 'one'), (2, 'two'), (3, 'three'), (4, 'four'), (5, 'five'))
+    rating = models.PositiveSmallIntegerField('Rating (stars)', blank=False, default=3, choices=RATING_CHOICES)
+    user = models.ForeignKey(User, default=1)
+    date = models.DateField(default=date.today)
+
+
+class GameReview(Review):
+    game = models.ForeignKey(Game)

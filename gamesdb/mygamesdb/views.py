@@ -1,13 +1,13 @@
 from django.views.generic import DetailView, ListView
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.base import TemplateResponseMixin
 from django.core import serializers
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView
 from django.shortcuts import redirect
 from django.views.generic.edit import DeleteView
-from django.core.urlresolvers import reverse_lazy
-from models import Developer, Platform, Game
+from django.core.urlresolvers import reverse_lazy, reverse
+from models import Developer, Platform, Game, GameReview
 from forms import *
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
@@ -85,6 +85,11 @@ class GameDetail(DetailView, ConnegResponseMixin):
     context_object_name = 'game'
     template_name = 'mygamesdb/games_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(GameDetail, self).get_context_data(**kwargs)
+        context['RATING_CHOICES'] = GameReview.RATING_CHOICES
+        return context
+
 
 class DeveloperDetail(DetailView, ConnegResponseMixin):
     model = Developer
@@ -143,7 +148,11 @@ class PlatformDelete(LoginRequiredMixin, CheckIsOwnerMixin, DeleteView):
     success_url = reverse_lazy('gamesdb:platforms_list')
 
 
-# def delete_game(request,rest_pk):
-#     delete_obj = Game.objects.get(pk=pk)
-#     delete_obj.delete()
-#     return redirect('http://127.0.0.1:8000/gamesdb/')
+def review(request, pk):
+    game = get_object_or_404(Game, pk=pk)
+    review = GameReview(
+        rating=request.POST['rating'],
+        game=game)
+    review.save()
+    return HttpResponseRedirect(reverse('gamesdb:games_detail', args=(game.id,)))
+
