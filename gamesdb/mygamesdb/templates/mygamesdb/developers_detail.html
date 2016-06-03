@@ -3,28 +3,32 @@
     <title>Developers</title>
   </head>
   <body>
+  <span vocab="http://schema.org/" typeof="Organization">
     <h1>Developer
         {% if user == object.ins_creator %}
             (<a href="{% url 'gamesdb:developer_edit' object.id %}">edit</a>)
             (<a href="{% url 'gamesdb:developer_delete' object.id %}">delete</a>)
         {% endif %}
     </h1>
-    <h2> {{ object.developer_name }} </h2>
+    <h2><span property="name"> {{ object.developer_name }}</span> </h2>
     {%	if object.image %}
-        <p><img	src="{{object.image.url}}" width="300px"/></p>
+    	<span rel="image">
+      	<span vocab="http://schema.org/" typeof="ImageObject">
+        	<p><img	src="{{object.image.url}}" width="300px"/></p></span></span>
     {%	endif	%}
     <ul>
       <li>
         <b>Id:</b> {{ object.id }}
       </li>
       <li>
-        <b>Fundation year:</b> {{ object.fundation_year }}
+        <b>Fundation year:</b><span property="foundingDate"> {{ object.fundation_year }}</span>
       </li>
       <li>
-        <b>Founder:</b> {{ object.founder }}
+        <b>Founder:</b> <span property ="founder">{{ object.founder }}</span>
       </li>
       <li>
-        <b>City:</b> {{ object.city }}
+      	<span vocab="http://schema.org/" typeof="Place">
+        <b>City:</b><span property = "name"> {{ object.city }}</span></span>
       </li>
       <li>
         <b>Province or State:</b> {{ object.province_or_state }}
@@ -40,9 +44,8 @@
       </li>
        <li>
         <b>Website:</b>
-         <a href="{{object.website}}" target="_blank"> {{object.website}} </a>
+         <a href="{{object.website}}" target="_blank"> {{object.website}}</a>
       </li>
-
       <br>
       <h3>Developes for platforms:</h3>
               {% for platform in object.platform_set.all %}
@@ -51,17 +54,17 @@
                 <li>Sorry, no platforms for this developer.</li>
             {% endfor %}
       <br>
-
       <h3>List of games</h3>
               {% for game in object.game_set.all %}
-                <li><a href="{% url 'gamesdb:games_detail' game.id %}">{{ game.game_title }}</a></li>
+                <li><a href="{% url 'gamesdb:games_detail' game.id %}"> {{ game.game_title }}</a></li>
               {% empty %}
                 <li>Sorry, no games for this developer yet.</li>
             {% endfor %}
+      </span>
       <br>
       <a href='/gamesdb/developers'> More video game developers </a>
-
       <br>
       <a href='/gamesdb'> Home </a>
+      </span>
   </body>
 </html>
